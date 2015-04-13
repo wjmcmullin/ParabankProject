@@ -21,14 +21,27 @@ import java.io.IOException;
  */
 public class Connect {
 
+    protected String accountInfoUrl (String host, String port, String accountNum) {
+        String url = "http://" + host + ":" + port + "/parabank/services/bank/customers/" +
+                accountNum + "/accounts?_type=json";
+
+        return url;
+    }
+
+    protected String loginUrl (String host, String port, String uname, String password) {
+        String url = "http://" + host + ":" + port +"/parabank/services/bank/login/" + uname + "/"
+                + password + "?_type=json";
+
+        return url;
+    }
+
     //Originally returned VOID
-    protected String makeConnection(String host, String port, String uname, String password)
+    protected String executeGet(String url)
     {
         //For the result
         String result = "";
         HttpClient httpClient = new DefaultHttpClient();
-        String url = "http://" + host + ":" + port +"/parabank/services/bank/login/" + uname + "/"
-                + password + "?_type=json";
+
         HttpGet httpGet = new HttpGet(url);
         try {
             HttpResponse response = httpClient.execute(httpGet);
@@ -39,7 +52,7 @@ public class Connect {
                 result = "It worked";
             }
             else
-                result = "\n No Connection";
+                result = "\n Please vefiry connection settings";
         } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
