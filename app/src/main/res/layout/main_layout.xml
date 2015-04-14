@@ -18,26 +18,28 @@
             android:id="@+id/Username_Layout">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="53dp"
                 android:layout_height="30dp"
                 android:text="Username:"
                 android:id="@+id/Username_View"
                 android:textAlignment="viewEnd"
-                android:gravity="end" />
+                android:gravity="end"
+                android:layout_weight="0.19" />
 
             <EditText
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/user_text"
                 android:inputType="text"
-                android:layout_weight="0.90" />
+                android:layout_weight="0.74" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="48dp"
-            android:id="@+id/Password_Layout">
+            android:id="@+id/Password_Layout"
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,13 +48,15 @@
                 android:id="@+id/Password_View"
                 android:textAlignment="viewEnd"
                 android:singleLine="false"
-                android:gravity="end" />
+                android:gravity="end"
+                android:layout_weight="0.47" />
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="288dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/pass_text"
-                android:inputType="text" />
+                android:inputType="text"
+                android:layout_weight="0.28" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,14 +71,15 @@
                 android:layout_height="match_parent"
                 android:text="URL:"
                 android:id="@+id/Host_View"
-                android:layout_weight="0.09" />
+                android:layout_weight="0.09"
+                android:gravity="end" />
 
             <EditText
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/host_text"
                 android:inputType="text"
-                android:layout_weight="0.17" />
+                android:layout_weight="0.09" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,7 +112,7 @@
             android:background="#ff000000" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="378dp"
             android:layout_height="match_parent"
             android:id="@+id/output_text" />
     </LinearLayout>

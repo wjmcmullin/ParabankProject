@@ -8,6 +8,7 @@ import org.apache.http.client.methods.HttpGet;
 
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,10 +51,11 @@ public class Connect {
             int statusCode = statusLine.getStatusCode();
 
             if (statusCode == 200) {
-                result = "It worked";
+                result = EntityUtils.toString(response.getEntity());
+                
             }
             else
-                result = "\n Please vefiry connection settings";
+                result = "\n Please verify connection settings";
         } catch (ClientProtocolException e) {
             result = e.getMessage();
             e.printStackTrace();

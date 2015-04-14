@@ -59,11 +59,11 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected String doInBackground(String... urls) {
             String output = "";
-
+            String url_path;
             try {
-
                 Connect connection = new Connect();
-                output = connection.executeGet(getHost(),getPort(),getUsername(),getPassword());
+                url_path = connection.loginUrl(getHost(),getPort(),getUsername(),getPassword());
+                output = connection.executeGet(url_path);
 
             } catch (Exception e) {
                 output = e.getMessage() + "\n" + e.getStackTrace();
@@ -99,7 +99,6 @@ public class MainActivity extends ActionBarActivity {
     private String getPort()
     {
         EditText port = (EditText) findViewById(R.id.port_text);
-        //EditText port = (EditText) findViewById(R.id.editText4);
         return port.getText().toString();
     }
 }
