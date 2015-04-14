@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-    package="com.parabank.parasoft.parabankproject" >
+    package="com.parabank.parasoft.app.android" >
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-=======
-    package="com.parabank.parasoft.app.android" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
->>>>>>> 1f2461ddc11220c1549a7eca3f85e4a43996410d
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

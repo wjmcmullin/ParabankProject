@@ -1,8 +1,10 @@
 package com.parabank.parasoft.app.android;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,16 +12,22 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.parabank.parasoft.app.android.adts.Customer;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static com.parabank.parasoft.app.android.Constants.NO_USER;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_HOST;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_PORT;
-import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_PROTOCOL;
-
-import com.loopj.android.http.*;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
     private EditText etUsername;
@@ -71,53 +79,35 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         loadingDialog.show();
 
         SharedPreferences preferences = getSharedPreferences(PREFS_PARABANK, MODE_PRIVATE);
-        String protocol = preferences.getString(PREFS_PARABANK_PROTOCOL, getResources().getString(R.string.example_protocol));
+        //String protocol = preferences.getString(PREFS_PARABANK_PROTOCOL, getResources().getString(R.string.example_protocol));
         String host = preferences.getString(PREFS_PARABANK_HOST, getResources().getString(R.string.example_host));
         String port = preferences.getString(PREFS_PARABANK_PORT, getResources().getString(R.string.example_port));
 
-        Connect connection = new Connect();
-        String loginUrl = connection.loginUrl(host, port, username, password);
-
+        String loginUrl = Connection.generateLoginURL(host, port, username, password);
         final AsyncHttpClient client = new AsyncHttpClient();
         client.get(loginUrl, new JsonHttpResponseHandler() {
-
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray jsona) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject jsonObject) {
                 if (!loadingDialog.isShowing()) {
                     return;
                 }
 
                 loadingDialog.dismiss();
 
-                login();
-
-                long id = NO_USER;
-                String name = null;
+                Customer customer = null;
                 try {
-                    JSONObject json = jsona.getJSONObject(0);
-                    JSONObject customer = json.getJSONObject("customer");
-                    id = Long.parseLong(customer.getString("id"));
-                    name = customer.getString("firstName");
+                    JSONObject obj = jsonObject.getJSONObject("customer");
+                    customer = new Customer(obj);
+                    login(customer);
                 } catch (JSONException e) {
-                    id = NO_USER;
-                    name = null;
-                } finally {
-                    if (id == NO_USER) {
-                        if (password != null) {
-                            AlertDialog.Builder errorDialog = new AlertDialog.Builder(LoginActivity.this);
-                            errorDialog.setTitle(R.string.dialog_login_error_title);
-                            errorDialog.setMessage(R.string.dialog_login_error);
-                            errorDialog.setPositiveButton(R.string.global_action_okay, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //...
-                                }
-                            });
-
-                            errorDialog.show();
+                    AlertDialog.Builder errorDialog = new AlertDialog.Builder(LoginActivity.this);
+                    errorDialog.setTitle(R.string.dialog_login_error_title);
+                    errorDialog.setMessage(e.getMessage());
+                    errorDialog.setPositiveButton(R.string.global_action_okay, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //...
                         }
-                    } else {
-                        login();
-                    }
+                    });
                 }
             }
 
@@ -140,26 +130,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 errorDialog.show();
             }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                if (!loadingDialog.isShowing()) {
-                    return;
-                }
-
-                loadingDialog.dismiss();
-
-                AlertDialog.Builder errorDialog = new AlertDialog.Builder(LoginActivity.this);
-                errorDialog.setTitle(R.string.dialog_login_error_title);
-                errorDialog.setMessage(throwable.getMessage());
-                errorDialog.setPositiveButton(R.string.global_action_okay, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        //...
-                    }
-                });
-
-                errorDialog.show();
-            }
         });
     }
 
@@ -168,7 +138,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         startActivity(i);
     }
 
-    private void login() {
-        Log.e("parabank", "Login Accepted!");
+    private void login(Customer customer) {
+
     }
 }
