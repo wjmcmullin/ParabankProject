@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:baselineAligned="false"
+	android:background="@color/parabank_background"
+>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="Parabank Logo"
+        android:src="@mipmap/parabank_logo"
+    />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="@android:color/transparent"
+		android:gravity="top|left"
+		android:padding="10dp"
+	>
+        <TextView
+            style="@style/style_textview"
+            android:text="@string/account_info"
+            />
+
+        <TextView
+            style="@style/style_textview"
+            android:id="@+id/tvFullName"
+            />
+
+        <TextView
+            style="@style/style_textview"
+            android:id="@+id/tvAddress"
+            />
+	</LinearLayout>
+
+    <include
+        layout="@layout/http_query_listview_layout"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="bottom|right"
+        android:background="@android:color/transparent"
+        android:padding="5dp"
+        >
+        <ImageButton
+            style="@style/style_imagebutton"
+            android:id="@+id/btnEditAccountInfo"
+            android:src="@mipmap/ic_action_settings"
+            />
+    </LinearLayout>
+</LinearLayout>

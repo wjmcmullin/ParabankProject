@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -24,6 +25,7 @@ import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.parabank.parasoft.app.android.Constants.INTENT_CUSTOMER;
 import static com.parabank.parasoft.app.android.Constants.NO_USER;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_HOST;
@@ -139,6 +141,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     private void login(Customer customer) {
+        String welcomeMessage = getString(R.string.login_welcome_back, customer.getFirstName());
+        Toast.makeText(this, welcomeMessage, Toast.LENGTH_LONG).show();
 
+        Intent i = new Intent(this, MainActivity.class);
+        i.putExtra(INTENT_CUSTOMER, customer);
+        startActivity(i);
     }
 }

@@ -3,6 +3,8 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
-    <color name="parabank_background">#4682B4</color>
-    <color name="parabank_foreground">#000000</color>
+    <color name="parabank_background">#FFFFFF</color>
+    <color name="parabank_foreground">#183b59</color>
+
+    <color name="parasoft_blue">#183b59</color>
 </resources>
