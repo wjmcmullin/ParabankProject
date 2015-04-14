@@ -36,13 +36,16 @@ public class Connect {
     }
 
     //Originally returned VOID
-    protected String executeGet(String url)
+    protected String executeGet(String url, String port, String user, String pass)
     {
+        //Adding port to the URL
+        String full_url = loginUrl(url,port,user,pass);
+
         //For the result
         String result = "";
         HttpClient httpClient = new DefaultHttpClient();
 
-        HttpGet httpGet = new HttpGet(url);
+        HttpGet httpGet = new HttpGet(full_url);
         try {
             HttpResponse response = httpClient.execute(httpGet);
             StatusLine statusLine = response.getStatusLine();

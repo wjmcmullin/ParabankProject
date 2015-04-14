@@ -23,13 +23,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //setContentView(R.layout.sample_main);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+        setContentView(R.layout.main_layout);
     }
 
 
@@ -59,67 +53,53 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            //View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            View rootView = inflater.inflate(R.layout.activity_main, container, false);
-            //View rootView = inflater.inflate(R.layout.sample_main, container, false);
-            return rootView;
-        }
-    }
 
     private class MakeConnection extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
-            String output = "Empty";
+            String output = "";
+
             try {
 
                 Connect connection = new Connect();
-                output = connection.makeConnection(getHost(),getPort(),getUsername(),getPassword());
+                connection.executeGet(getHost(),getPort(),getUsername(),getPassword());
 
             } catch (Exception e) {
-                output = e.getMessage();
+                //output = e.getMessage() + "\n" + e.getStackTrace();
+                e.printStackTrace();
             }
 
             return output;
         }
         @Override
         protected void onPostExecute(String result) {
-            TextView results = (TextView) findViewById(R.id.output_text);
-            results.setText(result);
+            TextView output = (TextView) findViewById(R.id.output_text);
+            output.setText(result);
         }
 
     }
     private String getUsername()
     {
         EditText uname = (EditText) findViewById(R.id.user_text);
-        return new String(uname.getText().toString());
+        return uname.getText().toString();
     }
 
     private String getPassword()
     {
         EditText pass = (EditText) findViewById(R.id.pass_text);
-        return new String(pass.getText().toString());
+        return pass.getText().toString();
     }
     private String getHost()
     {
-        EditText host = (EditText) findViewById(R.id.url_text);
-        return new String(host.getText().toString());
+        EditText host = (EditText) findViewById(R.id.host_text);
+        return host.getText().toString();
     }
 
     private String getPort()
     {
         EditText port = (EditText) findViewById(R.id.port_text);
-        return new String(port.getText().toString());
+        //EditText port = (EditText) findViewById(R.id.editText4);
+        return port.getText().toString();
     }
 }
