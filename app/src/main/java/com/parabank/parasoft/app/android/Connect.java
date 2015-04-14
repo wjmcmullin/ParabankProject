@@ -1,4 +1,4 @@
-package com.parabank.parasoft.parabankproject;
+package com.parabank.parasoft.app.android;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
