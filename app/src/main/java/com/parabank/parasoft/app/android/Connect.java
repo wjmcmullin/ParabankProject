@@ -22,22 +22,24 @@ import java.io.IOException;
  */
 public class Connect {
 
-    protected String accountInfoUrl (String host, String port, String accountNum) {
+    //Was originally protected
+    public String accountInfoUrl (String host, String port, String accountNum) {
         String url = "http://" + host + ":" + port + "/parabank/services/bank/customers/" +
                 accountNum + "/accounts?_type=json";
 
         return url;
     }
 
-    protected String loginUrl (String host, String port, String uname, String password) {
+    //Was originally protected
+    public String loginUrl (String host, String port, String uname, String password) {
         String url = "http://" + host + ":" + port +"/parabank/services/bank/login/" + uname + "/"
                 + password + "?_type=json";
 
         return url;
     }
 
-    //Originally returned VOID
-    protected String executeGet(String url)
+    //Originally returned VOID and protected
+    public String executeGet(String url)
     {
 
         //For the result

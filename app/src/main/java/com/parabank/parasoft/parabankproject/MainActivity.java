@@ -14,8 +14,8 @@ import android.os.Build;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.parabank.parasoft.parabankproject.Connect;
-
+//import com.parabank.parasoft.parabankproject.Connect;
+import com.parabank.parasoft.app.android.Connect;
 
 
 public class MainActivity extends ActionBarActivity {
