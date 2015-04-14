@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Parabank</string>
 
+    <string name="global_action_okay">Okay</string>
+    <string name="global_action_cancel">Cancel</string>
+    <string name="global_action_yes">Yes</string>
+    <string name="global_action_no">No</string>
+
     <string name="username">Username:</string>
     <string name="password">Password:</string>
 
@@ -13,4 +18,15 @@
 
     <string name="dialog_login_load_title">Logging in</string>
     <string name="dialog_login_load">Validating user authentication&#8230;</string>
+
+    <string name="host">Host:</string>
+    <string name="port">Port:</string>
+    <string name="apply">Apply</string>
+
+    <string name="example_protocol">http://</string>
+    <string name="example_host">parabank.parasoft.com</string>
+    <string name="example_port">80</string>
+
+    <string name="dialog_login_error_title">Login Failed</string>
+    <string name="dialog_login_error">Sorry, either your username or password was incorrect.</string>
 </resources>

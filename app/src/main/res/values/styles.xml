@@ -43,7 +43,7 @@
     </style>
 
     <style
-        name="style_edittext_email"
+        name="style_edittext_username"
         parent="style_edittext"
         >
         <item name="android:inputType">textEmailAddress</item>
