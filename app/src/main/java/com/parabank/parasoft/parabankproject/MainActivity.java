@@ -63,10 +63,10 @@ public class MainActivity extends ActionBarActivity {
             try {
 
                 Connect connection = new Connect();
-                connection.executeGet(getHost(),getPort(),getUsername(),getPassword());
+                output = connection.executeGet(getHost(),getPort(),getUsername(),getPassword());
 
             } catch (Exception e) {
-                //output = e.getMessage() + "\n" + e.getStackTrace();
+                output = e.getMessage() + "\n" + e.getStackTrace();
                 e.printStackTrace();
             }
 
