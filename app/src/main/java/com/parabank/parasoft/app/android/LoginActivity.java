@@ -19,6 +19,8 @@ import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_HOST;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_PORT;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_PROTOCOL;
 
+import com.loopj.android.http.*;
+
 public class LoginActivity extends Activity implements View.OnClickListener {
     private EditText etUsername;
     private EditText etPassword;
@@ -74,17 +76,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         String port = preferences.getString(PREFS_PARABANK_PORT, getResources().getString(R.string.example_port));
 
         Connect connection = new Connect();
-        String str = connection.loginUrl(host, port, username, password);
-        Log.e("parabank", connection.executeGet(str));
-        /*RequestParams params = new RequestParams();
-        params.put("_type", "json");
+        String loginUrl = connection.loginUrl(host, port, username, password);
 
         final AsyncHttpClient client = new AsyncHttpClient();
-        client.get(protocol + host + ":" + port + "/parabank/services/bank/login/" + username + "/" + password, params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.e("parabank", responseString);
-            }
+        client.get(loginUrl, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray jsona) {
@@ -165,7 +160,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 errorDialog.show();
             }
-        });*/
+        });
     }
 
     private void editConnectionSettings() {
