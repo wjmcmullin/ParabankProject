@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/ParabankProject2.iml" filepath="$PROJECT_DIR$/ParabankProject2.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/ParabankProject.iml" filepath="$PROJECT_DIR$/ParabankProject.iml" />
+>>>>>>> collinsmith-master
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
