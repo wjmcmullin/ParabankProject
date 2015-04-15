@@ -2,10 +2,12 @@ package com.parabank.parasoft.app.android;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,34 +31,46 @@ import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_HOST;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_PORT;
 
 public class MainActivity extends Activity implements View.OnClickListener {
+    static final int RESULT_EDIT_ACCOUNT_INFO = 0x000000001;
+
+    private Customer customer;
+
     private TextView tvFullName;
     private TextView tvAddress;
-
     private LinearLayout llProgressBar;
+    private ImageButton btnEditAccountInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
 
-        final Customer customer = getIntent().getParcelableExtra(INTENT_CUSTOMER);
+        customer = getIntent().getParcelableExtra(INTENT_CUSTOMER);
 
         tvFullName = (TextView)findViewById(R.id.tvFullName);
-        tvFullName.setText(customer.getFullName());
-
         tvAddress = (TextView)findViewById(R.id.tvAddress);
-        tvAddress.setText(customer.getAddress().getAddress());
-
         llProgressBar = (LinearLayout)findViewById(R.id.llProgressBar);
-        llProgressBar.setVisibility(View.VISIBLE);
 
+        btnEditAccountInfo = (ImageButton)findViewById(R.id.btnEditAccountInfo);
+        btnEditAccountInfo.setOnClickListener(this);
+
+        loadCustomerInfo();
+        loadAccounts();
+    }
+
+    private void loadCustomerInfo() {
+        customer = getIntent().getParcelableExtra(INTENT_CUSTOMER);
+        tvFullName.setText(customer.getFullName());
+        tvAddress.setText(customer.getAddress().getAddress());
+    }
+
+    private void loadAccounts() {
         SharedPreferences preferences = getSharedPreferences(PREFS_PARABANK, MODE_PRIVATE);
         //String protocol = preferences.getString(PREFS_PARABANK_PROTOCOL, getResources().getString(R.string.example_protocol));
         String host = preferences.getString(PREFS_PARABANK_HOST, getResources().getString(R.string.example_host));
         String port = preferences.getString(PREFS_PARABANK_PORT, getResources().getString(R.string.example_port));
 
-        Log.e("parabank", Long.toString(customer.getId()));
-
+        llProgressBar.setVisibility(View.VISIBLE);
         AsyncHttpClient client = new AsyncHttpClient();
         String accountInfoURL = Connection.generateAccountInfoURL(host, port, Long.toString(customer.getId()));
         client.get(accountInfoURL, new JsonHttpResponseHandler() {
@@ -90,5 +104,29 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.btnEditAccountInfo:
+                Intent i = new Intent(this, EditAccountInfoActivity.class);
+                i.putExtra(INTENT_CUSTOMER, getIntent().getParcelableExtra(INTENT_CUSTOMER));
+                startActivityForResult(i, RESULT_EDIT_ACCOUNT_INFO);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case RESULT_EDIT_ACCOUNT_INFO:
+                switch (resultCode) {
+                    case RESULT_CANCELED:
+                        break;
+                    case RESULT_OK:
+                        getIntent().putExtra(INTENT_CUSTOMER, data.getParcelableExtra(INTENT_CUSTOMER));
+                        loadCustomerInfo();
+                        break;
+                }
+
+                break;
+        }
     }
 }

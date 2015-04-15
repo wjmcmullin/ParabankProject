@@ -114,6 +114,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             }
 
             @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                onFailure(statusCode, headers, throwable.getMessage(), throwable);
+            }
+
+            @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 if (!loadingDialog.isShowing()) {
                     return;
@@ -123,7 +128,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 AlertDialog.Builder errorDialog = new AlertDialog.Builder(LoginActivity.this);
                 errorDialog.setTitle(R.string.dialog_login_error_title);
-                errorDialog.setMessage(responseString);
+                errorDialog.setMessage(String.format("%d - %s", statusCode, responseString.isEmpty() ? throwable.getMessage() : responseString));
                 errorDialog.setPositiveButton(R.string.global_action_okay, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         //...

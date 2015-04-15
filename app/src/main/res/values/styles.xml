@@ -55,7 +55,7 @@
         parent="style_edittext"
         >
         <item name="android:inputType">textPassword</item>
-        <item name="android:hint">@string/example_password</item>
+        <!--<item name="android:hint">@string/example_password</item>-->
     </style>
 
     <style

@@ -60,27 +60,28 @@ public class AccountsAdapter extends ArrayAdapter<Account> {
                 SpannableString text;
                 temp = Long.toString(account.getId());
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.parasoft_blue)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 temp = " [ ";
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.white)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 temp = account.getType();
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.parasoft_blue)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 temp = " ] ";
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.white)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 temp = account.getBalance();
+                double balance = Double.parseDouble(account.getBalance());
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(balance < 0 ? android.R.color.holo_red_light : android.R.color.holo_green_light)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 holder.tvAccountInfo.setText(builder);

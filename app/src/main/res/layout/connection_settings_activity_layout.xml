@@ -36,6 +36,7 @@
 			android:id="@+id/etHost"
             android:hint="@string/example_host"
 			android:layout_marginBottom="@dimen/login_component_spacing"
+            android:inputType="textUri"
 		/>
 		<TextView
 			style="@style/style_textview"
