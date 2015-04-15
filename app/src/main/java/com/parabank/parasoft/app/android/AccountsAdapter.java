@@ -58,7 +58,7 @@ public class AccountsAdapter extends ArrayAdapter<Account> {
 
                 String temp;
                 SpannableString text;
-                temp = Long.toString(account.getCustomerId());
+                temp = Long.toString(account.getId());
                 text = new SpannableString(temp);
                 text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
