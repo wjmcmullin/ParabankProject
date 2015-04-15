@@ -7,11 +7,12 @@
 	android:baselineAligned="false"
 	android:background="@color/parabank_background"
 >
-    <include
+   <!-- <include
         layout="@layout/http_query_spinner_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:background="@color/parabank_blue_transparent"
+        />-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

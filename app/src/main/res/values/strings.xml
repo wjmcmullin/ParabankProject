@@ -51,4 +51,9 @@
     <string name="example_city">Beverly Hills</string>
     <string name="example_state">CA</string>
     <string name="example_zipCode">90210</string>
+
+    <string name="updating_contact_info">Updating Server</string>
+
+    <string name="dialog_update_account_info_failed_title">Failed to Update Account Info</string>
+    <string name="dialog_update_account_info_failed">There was an issue contacting the server.</string>
 </resources>
