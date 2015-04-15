@@ -8,5 +8,5 @@ public interface Constants {
     String PREFS_PARABANK_HOST = "host";
     String PREFS_PARABANK_PORT = "port";
 
-    String INTENT_CUSTOMER = "customer";
+    String INTENT_USER = "user";
 }

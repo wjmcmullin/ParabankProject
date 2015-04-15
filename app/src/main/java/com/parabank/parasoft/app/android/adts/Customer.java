@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Customer implements Parcelable {
     private final long id;
     private final String firstName;
@@ -13,6 +15,15 @@ public class Customer implements Parcelable {
     private final Address address;
     private final String phoneNumber;
     private final String ssn;
+
+    public Customer(Customer parent, String firstName, String lastName, Address address, String phoneNumber, String ssn) {
+        this.id = parent.getId();
+        this.firstName = firstName == null ? parent.getFirstName() : firstName;
+        this.lastName = lastName == null ? parent.getLastName() : lastName;
+        this.address = address == null ? parent.getAddress() : address;
+        this.phoneNumber = phoneNumber == null ? parent.getPhoneNumber() : phoneNumber;
+        this.ssn = ssn == null ? parent.getSsn() : ssn;
+    }
 
     public Customer(JSONObject obj) throws JSONException {
         this.id = Long.parseLong(obj.getString("id"));

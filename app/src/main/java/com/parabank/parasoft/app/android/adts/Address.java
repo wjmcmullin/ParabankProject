@@ -12,6 +12,13 @@ public class Address implements Parcelable {
     private final String state;
     private final String zipCode;
 
+    public Address(Address parent, String street, String city, String state, String zipCode) {
+        this.street = street == null ? parent.getStreet() : street;
+        this.city = city == null ? parent.getCity() : city;
+        this.state = state == null ? parent.getState() : state;
+        this.zipCode = zipCode == null ? parent.getZipCode() : zipCode;
+    }
+
     public Address(JSONObject obj) throws JSONException {
         this.street = obj.getString("street");
         this.city = obj.getString("city");

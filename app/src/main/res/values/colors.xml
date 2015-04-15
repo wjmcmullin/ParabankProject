@@ -7,4 +7,5 @@
     <color name="parabank_foreground">#183b59</color>
 
     <color name="parasoft_blue">#183b59</color>
+    <color name="parabank_blue_transparent">#CC183b59</color>
 </resources>
