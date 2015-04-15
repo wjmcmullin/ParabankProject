@@ -154,7 +154,7 @@ public class EditAccountInfoActivity extends Activity implements View.OnClickLis
         AsyncHttpClient client = new AsyncHttpClient();
         client.post(updateURL, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(int statusCode, Header[] headers, String response) {
                 if (!loadingDialog.isShowing()) {
                     return;
                 }
@@ -174,6 +174,11 @@ public class EditAccountInfoActivity extends Activity implements View.OnClickLis
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                if (statusCode == 200) {
+                    onSuccess(statusCode, headers, responseString);
+                    return;
+                }
+
                 if (!loadingDialog.isShowing()) {
                     return;
                 }
