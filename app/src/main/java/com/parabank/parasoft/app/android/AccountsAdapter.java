@@ -13,15 +13,16 @@ import android.widget.TextView;
 
 import com.parabank.parasoft.app.android.adts.Account;
 import com.parabank.parasoft.app.android.adts.Customer;
+import com.parabank.parasoft.app.android.adts.User;
 
 import java.util.List;
 
 public class AccountsAdapter extends ArrayAdapter<Account> {
-    private final Customer customer;
+    private final User user;
 
-    public AccountsAdapter(Context context, Customer customer, List<Account> accounts) {
+    public AccountsAdapter(Context context, User user, List<Account> accounts) {
         super(context, 0, accounts);
-        this.customer = customer;
+        this.user = user;
     }
 
     private static class ViewHolder {

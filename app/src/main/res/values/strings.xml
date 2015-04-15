@@ -38,9 +38,17 @@
     <string name="lastName">Last Name:</string>
     <string name="phoneNumber">Phone Number:</string>
     <string name="ssn">SSN:</string>
+    <string name="street">Street Address:</string>
+    <string name="city">City:</string>
+    <string name="state">State:</string>
+    <string name="zipCode">Zip Code:</string>
 
     <string name="example_firstName">John</string>
     <string name="example_lastName">Smith</string>
     <string name="example_phoneNumber">111-222-3333</string>
     <string name="example_ssn">111-22-3333</string>
+    <string name="example_street">123 Main St.</string>
+    <string name="example_city">Beverly Hills</string>
+    <string name="example_state">CA</string>
+    <string name="example_zipCode">90210</string>
 </resources>

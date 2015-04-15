@@ -16,6 +16,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.parabank.parasoft.app.android.adts.Account;
 import com.parabank.parasoft.app.android.adts.Customer;
+import com.parabank.parasoft.app.android.adts.User;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -25,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.parabank.parasoft.app.android.Constants.INTENT_CUSTOMER;
+import static com.parabank.parasoft.app.android.Constants.INTENT_USER;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_HOST;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_PORT;
@@ -33,7 +34,7 @@ import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_PORT;
 public class MainActivity extends Activity implements View.OnClickListener {
     static final int RESULT_EDIT_ACCOUNT_INFO = 0x000000001;
 
-    private Customer customer;
+    private User user;
 
     private TextView tvFullName;
     private TextView tvAddress;
@@ -44,8 +45,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
-
-        customer = getIntent().getParcelableExtra(INTENT_CUSTOMER);
 
         tvFullName = (TextView)findViewById(R.id.tvFullName);
         tvAddress = (TextView)findViewById(R.id.tvAddress);
@@ -59,12 +58,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void loadCustomerInfo() {
-        customer = getIntent().getParcelableExtra(INTENT_CUSTOMER);
-        tvFullName.setText(customer.getFullName());
-        tvAddress.setText(customer.getAddress().getAddress());
+        user = getIntent().getParcelableExtra(INTENT_USER);
+        tvFullName.setText(user.getCustomer().getFullName());
+        tvAddress.setText(user.getCustomer().getAddress().getAddress());
     }
 
     private void loadAccounts() {
+        user = getIntent().getParcelableExtra(INTENT_USER);
         SharedPreferences preferences = getSharedPreferences(PREFS_PARABANK, MODE_PRIVATE);
         //String protocol = preferences.getString(PREFS_PARABANK_PROTOCOL, getResources().getString(R.string.example_protocol));
         String host = preferences.getString(PREFS_PARABANK_HOST, getResources().getString(R.string.example_host));
@@ -72,7 +72,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         llProgressBar.setVisibility(View.VISIBLE);
         AsyncHttpClient client = new AsyncHttpClient();
-        String accountInfoURL = Connection.generateAccountInfoURL(host, port, Long.toString(customer.getId()));
+        String accountInfoURL = Connection.generateAccountInfoURL(host, port, Long.toString(user.getCustomer().getId()));
         client.get(accountInfoURL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -88,7 +88,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 } catch (JSONException e) {
                 }
 
-                AccountsAdapter adapter = new AccountsAdapter(MainActivity.this, customer, accounts);
+                AccountsAdapter adapter = new AccountsAdapter(MainActivity.this, user, accounts);
                 ListView lvAccountsList = (ListView)findViewById(R.id.lvQueryResults);
                 if (adapter.isEmpty()) {
                     LinearLayout llEmptyList = (LinearLayout)findViewById(R.id.llEmptyList);
@@ -107,7 +107,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch(v.getId()) {
             case R.id.btnEditAccountInfo:
                 Intent i = new Intent(this, EditAccountInfoActivity.class);
-                i.putExtra(INTENT_CUSTOMER, getIntent().getParcelableExtra(INTENT_CUSTOMER));
+                i.putExtra(INTENT_USER, getIntent().getParcelableExtra(INTENT_USER));
                 startActivityForResult(i, RESULT_EDIT_ACCOUNT_INFO);
                 break;
         }
@@ -121,7 +121,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     case RESULT_CANCELED:
                         break;
                     case RESULT_OK:
-                        getIntent().putExtra(INTENT_CUSTOMER, data.getParcelableExtra(INTENT_CUSTOMER));
+                        getIntent().putExtra(INTENT_USER, data.getParcelableExtra(INTENT_USER));
                         loadCustomerInfo();
                         break;
                 }

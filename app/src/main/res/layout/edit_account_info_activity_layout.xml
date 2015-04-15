@@ -7,6 +7,11 @@
 	android:baselineAligned="false"
 	android:background="@color/parabank_background"
 >
+    <include
+        layout="@layout/http_query_spinner_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +32,30 @@
             android:gravity="top|left"
             android:padding="10dp"
         >
+            <TextView
+                style="@style/style_textview"
+                android:text="@string/username"
+                android:labelFor="@+id/etUsername"
+                />
+            <EditText
+                style="@style/style_edittext"
+                android:id="@+id/etUsername"
+                android:hint="@string/example_username"
+                android:layout_marginBottom="@dimen/login_component_spacing"
+                />
+
+            <TextView
+                style="@style/style_textview"
+                android:text="@string/password"
+                android:labelFor="@+id/etPassword"
+                />
+            <EditText
+                style="@style/style_edittext"
+                android:id="@+id/etPassword"
+                android:hint="@string/example_password"
+                android:layout_marginBottom="@dimen/login_component_spacing"
+                />
+
             <TextView
                 style="@style/style_textview"
                 android:text="@string/firstName"
@@ -75,6 +104,55 @@
                 style="@style/style_edittext"
                 android:hint="@string/example_ssn"
                 android:id="@+id/etSSN"
+                android:inputType="number"
+                android:layout_marginBottom="@dimen/login_component_spacing"
+            />
+
+            <TextView
+                style="@style/style_textview"
+                android:text="@string/street"
+                android:labelFor="@+id/etStreet"
+               />
+            <EditText
+                style="@style/style_edittext"
+                android:hint="@string/example_street"
+                android:id="@+id/etStreet"
+                android:layout_marginBottom="@dimen/login_component_spacing"
+            />
+
+            <TextView
+                style="@style/style_textview"
+                android:text="@string/city"
+                android:labelFor="@+id/etCity"
+               />
+            <EditText
+                style="@style/style_edittext"
+                android:hint="@string/example_city"
+                android:id="@+id/etCity"
+                android:layout_marginBottom="@dimen/login_component_spacing"
+            />
+
+            <TextView
+                style="@style/style_textview"
+                android:text="@string/state"
+                android:labelFor="@+id/etState"
+               />
+            <EditText
+                style="@style/style_edittext"
+                android:hint="@string/example_state"
+                android:id="@+id/etState"
+                android:layout_marginBottom="@dimen/login_component_spacing"
+            />
+
+            <TextView
+                style="@style/style_textview"
+                android:text="@string/zipCode"
+                android:labelFor="@+id/etZipCode"
+               />
+            <EditText
+                style="@style/style_edittext"
+                android:hint="@string/example_zipCode"
+                android:id="@+id/etZipCode"
                 android:inputType="number"
                 android:layout_marginBottom="@dimen/login_component_spacing"
             />
