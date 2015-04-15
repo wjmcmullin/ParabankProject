@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private TextView tvFullName;
     private TextView tvAddress;
     private LinearLayout llProgressBar;
+    private ImageButton btnEditAccountInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         tvFullName = (TextView)findViewById(R.id.tvFullName);
         tvAddress = (TextView)findViewById(R.id.tvAddress);
         llProgressBar = (LinearLayout)findViewById(R.id.llProgressBar);
+
+        btnEditAccountInfo = (ImageButton)findViewById(R.id.btnEditAccountInfo);
+        btnEditAccountInfo.setOnClickListener(this);
 
         loadCustomerInfo();
         loadAccounts();
