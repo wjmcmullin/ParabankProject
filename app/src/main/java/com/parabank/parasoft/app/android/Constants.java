@@ -7,4 +7,6 @@ public interface Constants {
     String PREFS_PARABANK_PROTOCOL = "protocol";
     String PREFS_PARABANK_HOST = "host";
     String PREFS_PARABANK_PORT = "port";
+
+    String INTENT_CUSTOMER = "customer";
 }

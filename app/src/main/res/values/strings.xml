@@ -29,4 +29,8 @@
 
     <string name="dialog_login_error_title">Login Failed</string>
     <string name="dialog_login_error">Sorry, either your username or password was incorrect.</string>
+
+    <string name="login_welcome_back">Hello %1$s, welcome back!</string>
+
+    <string name="account_info">User Information</string>
 </resources>
