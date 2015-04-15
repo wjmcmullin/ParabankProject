@@ -4,15 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.parabank.parasoft.app.android.adts.Address;
 import com.parabank.parasoft.app.android.adts.Customer;
 import com.parabank.parasoft.app.android.adts.User;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 import static com.parabank.parasoft.app.android.Constants.INTENT_USER;
 
@@ -102,18 +105,25 @@ public class EditAccountInfoActivity extends Activity implements View.OnClickLis
                 );
 
                 updateAccountInfo(newUser);
-
-                Intent i = new Intent();
-                i.putExtra(INTENT_USER, newUser);
-                setResult(RESULT_OK, i);
-                finish();
                 break;
         }
     }
 
-    private void updateAccountInfo(User newUser) {
+    private void updateAccountInfo(final User newUser) {
         LinearLayout llProgressBar = (LinearLayout)findViewById(R.id.llProgressBar);
         llProgressBar.setVisibility(View.VISIBLE);
 
+        String updateURL = "";
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(updateURL, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Intent i = new Intent();
+                i.putExtra(INTENT_USER, newUser);
+                setResult(RESULT_OK, i);
+                finish();
+            }
+        });
     }
 }
