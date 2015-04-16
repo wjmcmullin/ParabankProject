@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="Parabank Logo"
-        android:src="@mipmap/parabank_logo"
+        android:src="@drawable/parabank_logo"
     />
 
 	<LinearLayout
@@ -42,6 +42,11 @@
         layout="@layout/http_query_listview_layout"
         />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/parasoft_blue"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

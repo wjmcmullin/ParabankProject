@@ -23,5 +23,6 @@
 		style="@style/style_listview"
 		android:id="@+id/lvQueryResults"
 		android:dividerHeight="3dp"
+        android:divider="@color/parasoft_blue"
 	/>
 </LinearLayout>

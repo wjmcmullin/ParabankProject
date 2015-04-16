@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="Parabank Logo"
-        android:src="@mipmap/parabank_logo"
+        android:src="@drawable/parabank_logo"
     />
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -36,6 +36,7 @@
 			android:id="@+id/etHost"
             android:hint="@string/example_host"
 			android:layout_marginBottom="@dimen/login_component_spacing"
+            android:inputType="textUri"
 		/>
 		<TextView
 			style="@style/style_textview"

@@ -12,16 +12,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.parabank.parasoft.app.android.adts.Account;
-import com.parabank.parasoft.app.android.adts.Customer;
+import com.parabank.parasoft.app.android.adts.User;
 
 import java.util.List;
 
 public class AccountsAdapter extends ArrayAdapter<Account> {
-    private final Customer customer;
+    private final User user;
 
-    public AccountsAdapter(Context context, Customer customer, List<Account> accounts) {
+    public AccountsAdapter(Context context, User user, List<Account> accounts) {
         super(context, 0, accounts);
-        this.customer = customer;
+        this.user = user;
     }
 
     private static class ViewHolder {
@@ -32,6 +32,9 @@ public class AccountsAdapter extends ArrayAdapter<Account> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Account account = getItem(position);
@@ -58,29 +61,30 @@ public class AccountsAdapter extends ArrayAdapter<Account> {
 
                 String temp;
                 SpannableString text;
-                temp = Long.toString(account.getCustomerId());
+                temp = Long.toString(account.getId());
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.parasoft_blue)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 temp = " [ ";
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.white)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 temp = account.getType();
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.parasoft_blue)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 temp = " ] ";
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.white)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 temp = account.getBalance();
+                double balance = Double.parseDouble(account.getBalance());
                 text = new SpannableString(temp);
-                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.black)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(balance < 0 ? android.R.color.holo_red_light : android.R.color.holo_green_light)), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 builder.append(text);
 
                 holder.tvAccountInfo.setText(builder);
