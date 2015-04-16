@@ -2,10 +2,11 @@ package com.parabank.parasoft.app.android;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -15,7 +16,6 @@ import android.widget.TextView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.parabank.parasoft.app.android.adts.Account;
-import com.parabank.parasoft.app.android.adts.Customer;
 import com.parabank.parasoft.app.android.adts.User;
 
 import org.apache.http.Header;
@@ -41,6 +41,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private LinearLayout llProgressBar;
     private ImageButton btnEditAccountInfo;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +79,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         client.get(accountInfoURL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                List<Account> accounts = new ArrayList<Account>();
+                List<Account> accounts = new ArrayList<>();
 
                 try {
                     JSONObject obj;
@@ -86,6 +89,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         accounts.add(new Account(obj));
                     }
                 } catch (JSONException e) {
+                    AlertDialog.Builder errorDialog = new AlertDialog.Builder(MainActivity.this);
+                    errorDialog.setMessage(e.getMessage());
+                    errorDialog.setPositiveButton(R.string.global_action_okay, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //...
+                        }
+                    });
                 }
 
                 AccountsAdapter adapter = new AccountsAdapter(MainActivity.this, user, accounts);
@@ -102,6 +112,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
@@ -113,6 +126,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {

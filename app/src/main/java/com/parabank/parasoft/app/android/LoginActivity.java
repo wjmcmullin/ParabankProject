@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -37,6 +36,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private Button btnLogin;
     private ImageButton btnConnectionSettings;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         btnConnectionSettings.setOnClickListener(this);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onClick(View v) {
         String username = etUsername.getText().toString();
@@ -96,7 +100,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 loadingDialog.dismiss();
 
-                Customer customer = null;
                 try {
                     JSONObject obj = jsonObject.getJSONObject("customer");
                     login(new User(username, password, new Customer(obj)));

@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -47,6 +46,9 @@ public class EditAccountInfoActivity extends Activity implements View.OnClickLis
     private ImageButton btnRejectChanges;
     private ImageButton btnAcceptChanges;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +88,9 @@ public class EditAccountInfoActivity extends Activity implements View.OnClickLis
         etZipCode.setText(originalUser.getCustomer().getAddress().getZipCode());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onClick(View v) {
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -121,7 +126,7 @@ public class EditAccountInfoActivity extends Activity implements View.OnClickLis
                             etZipCode.getText().toString()
                         ),
                         etPhoneNumber.getText().toString(),
-                        etZipCode.getText().toString()
+                        etSSN.getText().toString()
                     )
                 );
 

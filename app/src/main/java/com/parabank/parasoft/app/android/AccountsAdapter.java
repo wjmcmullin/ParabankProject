@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.parabank.parasoft.app.android.adts.Account;
-import com.parabank.parasoft.app.android.adts.Customer;
 import com.parabank.parasoft.app.android.adts.User;
 
 import java.util.List;
@@ -33,6 +32,9 @@ public class AccountsAdapter extends ArrayAdapter<Account> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Account account = getItem(position);

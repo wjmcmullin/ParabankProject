@@ -19,6 +19,9 @@ public class ConnectionSettingsActivity extends Activity implements View.OnClick
 
     private SharedPreferences preferences;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,9 @@ public class ConnectionSettingsActivity extends Activity implements View.OnClick
         btnApply.setOnClickListener(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
