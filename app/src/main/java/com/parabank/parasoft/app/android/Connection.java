@@ -7,6 +7,7 @@ package com.parabank.parasoft.app.android;
  * @author jrodriguez@parasoft.com
  */
 public final class Connection {
+<<<<<<< HEAD
     /**
      * This class is uninitializable.
      */
@@ -26,12 +27,17 @@ public final class Connection {
      *      the account information for the given account
      */
     public static String generateAccountInfoURL(String host, String port, String accountNum) {
+=======
+    public static String generateAccountInfoURL (String host, String port, String accountNumber) {
+
+>>>>>>> 7ebceb94be7dadd89b23c5e2c6f4caaf2c7b4daa
         String url = "http://" + host + ":" + port + "/parabank/services/bank/customers/"
-                + accountNum + "/accounts?_type=json";
+                + accountNumber + "/accounts?_type=json";
 
         return url.replaceAll("\\s", "%20");
     }
 
+<<<<<<< HEAD
     /**
      * Generates and returns a String representation of the URL to the
      * specified Parabank instance which will determine whether or not the
@@ -46,6 +52,10 @@ public final class Connection {
      *      combination are valid.
      */
     public static String generateLoginURL(String host, String port, String uname, String password) {
+=======
+    public static String generateLoginURL (String host, String port, String uname, String password)
+    {
+>>>>>>> 7ebceb94be7dadd89b23c5e2c6f4caaf2c7b4daa
         String url = "http://" + host + ":" + port + "/parabank/services/bank/login/"
                 + uname + "/" + password + "?_type=json";
 
@@ -88,5 +98,19 @@ public final class Connection {
                 + "?_type=json";
 
         return url.replaceAll("\\s", "%20");
+    }
+
+    public static  String generateUpdateURL (String host, String port, String accountNumber,
+                String firstName, String lastName, String address, String city, String state,
+                String zipCode, String phoneNumber, String socialSecurity, String uname,
+                String password) {
+
+        String url = "http://" + host + ":" + port + "customers/update/" + accountNumber + "/" +
+                firstName + "/" + lastName + "/" + address + "/" + city + "/" + state + "/" +
+                zipCode + "/" + phoneNumber + "/" + socialSecurity + "/" + uname + "/" + password +
+                "?_type=json";
+
+        return url;
+
     }
 }
