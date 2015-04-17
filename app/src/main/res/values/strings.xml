@@ -56,4 +56,6 @@
 
     <string name="dialog_update_account_info_failed_title">Failed to Update Account Info</string>
     <string name="dialog_update_account_info_failed">There was an issue contacting the server.</string>
+
+    <string name="unchanged">(unchanged)</string>
 </resources>

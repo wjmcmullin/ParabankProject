@@ -75,7 +75,7 @@ public class EditAccountInfoActivity extends Activity implements View.OnClickLis
 
         originalUser = getIntent().getParcelableExtra(INTENT_USER);
         etUsername.setText(originalUser.getUsername());
-        etPassword.setText(originalUser.getPassword());
+        //etPassword.setText(originalUser.getPassword());
 
         etFirstName.setText(originalUser.getCustomer().getFirstName());
         etLastName.setText(originalUser.getCustomer().getLastName());
@@ -113,7 +113,7 @@ public class EditAccountInfoActivity extends Activity implements View.OnClickLis
             case R.id.btnAcceptChanges:
                 User newUser = new User(
                     etUsername.getText().toString(),
-                    etPassword.getText().toString(),
+                    etPassword.getText().toString().isEmpty() ? originalUser.getPassword() : etPassword.getText().toString(),
                     new Customer(
                         originalUser.getCustomer(),
                         etFirstName.getText().toString(),
