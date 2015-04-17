@@ -39,6 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private TextView tvFullName;
     private TextView tvAddress;
     private LinearLayout llProgressBar;
+    private ImageButton btnLogout;
     private ImageButton btnEditAccountInfo;
 
     /**
@@ -52,6 +53,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         tvFullName = (TextView)findViewById(R.id.tvFullName);
         tvAddress = (TextView)findViewById(R.id.tvAddress);
         llProgressBar = (LinearLayout)findViewById(R.id.llProgressBar);
+
+        btnLogout = (ImageButton)findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(this);
 
         btnEditAccountInfo = (ImageButton)findViewById(R.id.btnEditAccountInfo);
         btnEditAccountInfo.setOnClickListener(this);
@@ -118,6 +122,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
+            case R.id.btnLogout:
+                finish();
+                break;
             case R.id.btnEditAccountInfo:
                 Intent i = new Intent(this, EditAccountInfoActivity.class);
                 i.putExtra(INTENT_USER, getIntent().getParcelableExtra(INTENT_USER));
