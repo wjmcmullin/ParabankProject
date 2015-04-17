@@ -7,7 +7,6 @@ package com.parabank.parasoft.app.android;
  * @author jrodriguez@parasoft.com
  */
 public final class Connection {
-<<<<<<< HEAD
     /**
      * This class is uninitializable.
      */
@@ -22,22 +21,20 @@ public final class Connection {
      *
      * @param host host to sent the HTTP request to
      * @param port port on the host for Parabank
-     * @param accountNum account number whose info to retrieve
+     * @param accountNumber account number whose info to retrieve
      * @return a String representation of the URL to use in order to retrieve
      *      the account information for the given account
      */
-    public static String generateAccountInfoURL(String host, String port, String accountNum) {
-=======
+
     public static String generateAccountInfoURL (String host, String port, String accountNumber) {
 
->>>>>>> 7ebceb94be7dadd89b23c5e2c6f4caaf2c7b4daa
         String url = "http://" + host + ":" + port + "/parabank/services/bank/customers/"
                 + accountNumber + "/accounts?_type=json";
 
         return url.replaceAll("\\s", "%20");
     }
 
-<<<<<<< HEAD
+
     /**
      * Generates and returns a String representation of the URL to the
      * specified Parabank instance which will determine whether or not the
@@ -51,11 +48,10 @@ public final class Connection {
      *      determine whether or not the specified username/password
      *      combination are valid.
      */
-    public static String generateLoginURL(String host, String port, String uname, String password) {
-=======
+
     public static String generateLoginURL (String host, String port, String uname, String password)
     {
->>>>>>> 7ebceb94be7dadd89b23c5e2c6f4caaf2c7b4daa
+
         String url = "http://" + host + ":" + port + "/parabank/services/bank/login/"
                 + uname + "/" + password + "?_type=json";
 
@@ -100,7 +96,7 @@ public final class Connection {
         return url.replaceAll("\\s", "%20");
     }
 
-    public static  String generateUpdateURL (String host, String port, String accountNumber,
+  /*    public static  String generateUpdateURL (String host, String port, String accountNumber,
                 String firstName, String lastName, String address, String city, String state,
                 String zipCode, String phoneNumber, String socialSecurity, String uname,
                 String password) {
@@ -112,5 +108,5 @@ public final class Connection {
 
         return url;
 
-    }
+    } */
 }
