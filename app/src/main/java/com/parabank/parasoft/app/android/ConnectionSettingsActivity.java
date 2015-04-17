@@ -6,8 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_HOST;
 import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_PORT;
@@ -15,7 +16,8 @@ import static com.parabank.parasoft.app.android.Constants.PREFS_PARABANK_PORT;
 public class ConnectionSettingsActivity extends Activity implements View.OnClickListener {
     private EditText etHost;
     private EditText etPort;
-    private Button btnApply;
+    private ImageButton btnAcceptChanges;
+    private ImageButton btnRejectChanges;
 
     private SharedPreferences preferences;
 
@@ -36,8 +38,11 @@ public class ConnectionSettingsActivity extends Activity implements View.OnClick
         etPort = (EditText)findViewById(R.id.etPort);
         etPort.setText(preferences.getString(PREFS_PARABANK_PORT, getResources().getString(R.string.example_port)));
 
-        btnApply = (Button)findViewById(R.id.btnApply);
-        btnApply.setOnClickListener(this);
+        btnAcceptChanges = (ImageButton)findViewById(R.id.btnAcceptChanges);
+        btnAcceptChanges.setOnClickListener(this);
+
+        btnRejectChanges = (ImageButton)findViewById(R.id.btnRejectChanges);
+        btnRejectChanges.setOnClickListener(this);
     }
 
     /**
@@ -45,15 +50,18 @@ public class ConnectionSettingsActivity extends Activity implements View.OnClick
      */
     @Override
     public void onClick(View v) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(etHost.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(etPort.getWindowToken(), 0);
         switch(v.getId()) {
-            case R.id.btnApply:
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(etHost.getWindowToken(), 0);
-                imm.hideSoftInputFromWindow(etPort.getWindowToken(), 0);
+            case R.id.btnAcceptChanges:
                 preferences.edit()
                     .putString(PREFS_PARABANK_HOST, etHost.getText().toString())
                     .putString(PREFS_PARABANK_PORT, etPort.getText().toString())
                     .apply();
+                finish();
+                break;
+            case R.id.btnRejectChanges:
                 finish();
                 break;
         }
