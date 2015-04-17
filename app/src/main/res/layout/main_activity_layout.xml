@@ -61,7 +61,7 @@
             android:layout_width="48dp"
             android:scaleType="fitXY"
             android:id="@+id/btnLogout"
-            android:src="@mipmap/ic_action_back"
+            android:src="@mipmap/ic_action_logout"
             />
         <LinearLayout
             android:layout_height="wrap_content"
